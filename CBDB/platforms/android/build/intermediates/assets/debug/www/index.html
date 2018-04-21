@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+    <!-- Your custom Theme Roller code goes here: -->
+    <link rel="stylesheet" type="text/css" href="css/mycsscolors.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+	<style>
+		.comicImg {
+		width: 100%;
+		box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+		border-radius: 25px;
+		}
+	</style>
+    <title>CBDb</title>
+</head>
+    <body>
+        <!-- Welcome Screen START -->
+        <section data-role="page" data-theme="a" id="pgWelcome">
+            <header data-role="header" data-position="fixed">
+                <h1>CBDb</h1>
+            </header>
+            <article role="main" class="ui-content">
+                <h2>Returning User</h2>
+                <a href="#pgLogIn" data-role="button" data-transition="flip" data-icon="arrow-r" data-iconpos="right">Log In</a>
+                <h2>New User</h2>
+                <a href="#pgSignUp" data-role="button" data-transition="slideup" data-icon="user">Sign Up</a>
+            </article>
+        </section>
+        <!-- Welcome Screen END -->
+        <!-- Sign UP Screen START -->
+        <section data-role="page" data-theme="a" id="pgSignUp">
+            <header data-role="header" data-position="fixed" data-add-back-btn="true">
+                <h1>Sign Up</h1>
+            </header>
+            <article role="main" class="ui-content">
+                <form id="formSignUp">
+                    <label for="inEmailSignUp">Email:</label>
+                    <input name="inEmailSignUp" type="email" placeholder="bruce@wayne.tech" required id="inEmailSignUp">
+                    <label for="inPasswordSignUp">Password:</label>
+                    <input name="inPasswordSignUp" type="password" required id="inPasswordSignUp">
+                    <label for="inPasswordConfirmSignUp">Confirm Password:</label>
+                    <input name="inPasswordConfirmSignUp" type="password" required id="inPasswordConfirmSignUp">
+                    <input type="submit" value="Join"> <input type="reset" value="Clear">
+                </form>
+                <!--
+                Basic jQM-based Error Pop Messages.
+                They should exist in the Article of the Section in question
+            -->
+                <div data-role="popup" class="ui-content" id="popErrorSignUpMismatch">Password don't match!</div>
+                <div data-role="popup" class="ui-content" id="popErrorSignUpExists">Account already exists!</div>
+
+                <!-- A more complex jQM popup. Note the differences.  -->
+                <div data-role="popup" data-dialog="true" data-dismissible="false" id="popSuccessSignUp">
+                    <header data-role="header">
+                        <h1>Welcome!</h1>
+                    </header>
+                    <article role="main" class="ui-content">
+                        <p>
+                            Thank you. Ready to go:<br>
+                            <a href="#pgLogIn" data-role="button" data-transition="flip">Log In</a>
+                        </p>
+                    </article>
+                </div>
+            </article>
+        </section>
+        <!-- Sign Up Screen END -->
+        <!-- Log In Screen START -->
+        <section data-role="page" data-theme="a" id="pgLogIn">
+            <header data-role="header" data-position="fixed" data-add-back-btn="true">
+                <h1>Log In</h1>
+            </header>
+            <article role="main" class="ui-content">
+                <form id="formLogIn">
+                    <label for="inEmailLogIn">Email:</label>
+                    <input name="inEmailLogIn" type="email" placeholder="peter@parker.co" required id="inEmailLogIn">
+                    <label for="inPasswordLogIn">Password:</label>
+                    <input name="inPasswordLogIn" type="password" required id="inPasswordLogIn">
+                    <input type="submit" value="Go!">
+                </form>
+                <div data-role="popup" class="ui-content" id="popErrorLogInNotExists">Account doesn't exist!</div>
+                <div data-role="popup" class="ui-content" id="popErrorLogInWrongPass">Wrong password!</div>
+            </article>
+        </section>
+        <!-- Log In Screen END -->
+        <!-- Home Screen START -->
+        <section data-role="page" data-theme="a" id="pgHome">
+            <header data-role="header" data-position="fixed">
+                <h1>CBDb</h1>
+                <!-- Long-form way to define a button via Classes -->
+                <a href="#pgOptions" data-transition="pop" class="ui-btn ui-btn-right ui-btn-icon-right ui-corner-all ui-icon-gear ui-btn-icon-notext">Options</a>
+                <nav data-role="navbar">
+                    <ul>
+                        <li><a href="#pgSaveComic" data-icon="camera" data-transition="flow">Save Comic</a></li>
+                        <li><a href="#pgViewComics" data-icon="eye" data-transition="flow">View Comics</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <article role="main" class="ui-content">
+				<h2>Welcome!</h2>
+					<p>The CBDb app, the app that helps you keep track of your comic book collection!</p>
+                <p><img src="images/CBDB-square-1.png" class="comicImg" /></p>
+            </article>
+            <footer data-role="footer" data-position="fixed">
+                <!-- Instead of an ID (that can only be used once per file),
+                we use a Class, which ca be used any number of times
+                per file. IDs/Classes can be used for CSS or JS, FYI
+            -->
+                <h4 class="userEmail">xxx</h4>
+            </footer>
+        </section>
+        <!-- Home Screen END -->
+
+        <!-- Options Screen START -->
+        <!-- An HTML-based Pop Screen Syntax -->
+        <section data-role="page" data-theme="a" data-dialog="true" id="pgOptions">
+            <header data-role="header">
+                <h1>Options</h1>
+            </header>
+            <article role="main" class="ui-content">
+                <h2>xxxxxxxx</h2>
+                <p>
+                    <a href="#" data-role="button" data-icon="delete" id="btnDeleteCollection"> DELETE COLLECTION</a>
+                    <!-- Dummy Link (goes nowhere, but behaves like a button), so we use JS  -->
+                    <a href="#" data-role="button" data-icon="alert" id="btnLogOut">Log Out</a>
+                </p>
+            </article>
+        </section>
+        <!-- Options Screen END -->
+        <!-- View Comics Screen START -->
+        <section data-role="page" data-theme="a" id="pgViewComics">
+            <header data-role="header" data-position="fixed">
+                <h1>CBDb</h1>
+                <!-- Long-form way to define a button via Classes -->
+                <a href="#pgOptions" data-transition="pop" class="ui-btn ui-btn-right ui-btn-icon-right ui-corner-all ui-icon-gear ui-btn-icon-notext">Options</a>
+                <nav data-role="navbar">
+                    <ul>
+                        <li><a href="#pgHome"       data-icon="home"    data-transition="flow">Home</a></li>
+                        <li><a href="#pgSaveComic"  data-icon="camera"  data-transition="flow">Save Comic</a></li>
+                        <li><a href="#pgViewComics" data-icon="eye"     data-transition="flow" class="ui-btn-active ui-state-persist">View Comics</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <article role="main" class="ui-content">
+                <!-- Placeholder that will udpate via JS -->
+                <div id="divShowComicsTable">zzz</div>
+            </article>
+        </section>
+        <!-- View Comics Screen END -->
+        <!-- Save Comic Screen START -->
+        <section data-role="page" data-theme="a" id="pgSaveComic">
+            <header data-role="header" data-position="fixed">
+                <h1>CBDb</h1>
+                <!-- Long-form way to define a button via Classes -->
+                <a href="#pgOptions" data-transition="pop" class="ui-btn ui-btn-right ui-btn-icon-right ui-corner-all ui-icon-gear ui-btn-icon-notext">Options</a>
+                <nav data-role="navbar">
+                    <ul>
+                        <li><a href="#pgHome"       data-icon="home"    data-transition="flow">Home</a></li>
+                        <li><a href="#pgSaveComic"  data-icon="camera"  data-transition="flow" class="ui-btn-active ui-state-persist">Save Comic</a></li>
+                        <li><a href="#pgViewComics" data-icon="eye"     data-transition="flow">View Comics</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <article role="main" class="ui-content">
+                <form id="formSaveComic">
+                    <fieldset>
+                        <legend>Required</legend>
+                        <label for="inTitle">Title:</label>   <input type="text" placeholder="Iron Man" required name="inTitle" id="inTitle">
+                        <label for="inNumber">Number:</label> <input type="number" placeholder="333" required name="inNumber" id="inNumber">
+                        <label for="inYear">Year:</label>     <input type="number" placeholder="1994" required name="inYear" id="inYear">
+                    </fieldset>
+                    <fieldset>
+                        <legend>Optional</legend>
+                        <label for="inPublisher">Publisher:</label> <input type="text" placeholder="Marvel" name="inPublisher" id="inPublisher">
+                        <label for="inNotes">Notes:</label> <textarea placeholder="Anniversary issue" name="inNotes" id="inNotes"></textarea>
+                    </fieldset>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <input type="reset" value="Reset" data-icon="delete">
+                        </div>
+                        <div class="ui-block-b">
+                            <input type="submit" value="Save" data-icon="check">
+                        </div>
+                    </div>
+                </form>
+                <div data-role="popup" class="ui-content" id="popComicSaved">Comic saved!</div>
+            </article>
+        </section>
+        <!-- Save Comic Screen END -->
+
+        <!-- View Comics Info screen START -->
+        <section data-role="page" data-theme="a" id="popViewComicsInfo">
+            <header data-role="header" data-position="fixed">
+                <h1>Comic Info</h1>
+            </header>
+            <article role="main" class="ui-content">
+                <div id="divViewComicsInfo">
+                    <p>Name: </p>
+                    <p>Number: </p>
+                    <p>Year: </p>
+                    <p>Piblisher: </p>
+                    <p>Notes: </p>
+                    <p>Barcode: </p>
+                    <p><img src="" class="comicImg" /></p>
+                    <p><button id="btnDeleteComic">Delete</button></p>
+                    <p><button id="btnEditComicPrep">Edit</button></p>
+                </div>
+            </article>
+        </section>
+        <!-- View Comics Info screen END -->
+
+        <!-- Edit Comics Info screen START -->
+        <section data-role="page" data-theme="a" id="popEditComicsInfo">
+            <header data-role="header" data-position="fixed">
+                <h1>Edit</h1>
+            </header>
+            <article role="main" class="ui-content">
+                <form id="formEditComicsInfo">
+                    <label for="inTitleEdit">Name:</label>
+                        <input type="text" placeholder="Comic Name" name="inTitleEdit" id="inTitleEdit"/>
+                    <label for="inNumberEdit">Number:</label>
+                        <input type="number" placeholder="300" name="inNumberEdit" id="inNumberEdit" />
+                    <label for="inYearEdit">Year:</label>
+                        <input type="number" placeholder="1996" name="inYearEdit" id="inYearEdit" />
+                    <label for="inPublisherEdit">Publisher:</label>
+                        <input type="text" placeholder="VmC Ink." name="inPublisherEdit" id="inPublisherEdit"/>
+                    <label for="inNotesEdit">Notes:</label>
+                        <textarea placeholder="Some notes" name="inNotesEdit" id="inNotesEdit"></textarea>
+                    <label for="inBarcodeEdit">Barcode:</label>
+                        <input type="text" placeholder="43544566" name="inBarcodeEdit" id="inBarcodeEdit"/>
+                    <input type="button" value="Cancel" id="btnEditComicCancel"/>
+                    <input type="submit" value="Update" />
+                </form>
+            </article>
+        </section>
+        <!-- Edit Comics Info screen END -->
+
+        <!-- TEMPLATE screen START -->
+        <section data-role="page" data-theme="a" id="TEMPLATE">
+            <header data-role="header" data-position="fixed">
+                <h1>TOP</h1>
+                <nav data-role="navbar">
+                    <ul>
+                        <li><a href="#">PAGE 1</a></li>
+                        <li><a href="#">PAGE 2</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <article role="main" class="ui-content">
+                <h2>MAIN</h2>
+            </article>
+            <footer data-role="footer" data-position="fixed">
+                <h4>BOTTOM</h4>
+            </footer>
+        </section>
+        <!-- TEMPLATE screen END -->
+
+
+        <script src="scripts/jquery-2.1.0.min.js"></script>
+        <script src="scripts/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script src="scripts/pouchdb-6.4.3.min.js"></script>
+        <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+        <script type="text/javascript" src="scripts/index.js"></script>
+    </body>
+</html>
